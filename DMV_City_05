@@ -1,0 +1,71 @@
+# Practical No 5
+
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+
+data=pd.read_csv('city_day.csv')
+
+data['Date']=pd.to_datetime(data['Date'])
+
+data
+
+data.info()
+
+data.describe()
+
+data.head()
+
+plt.figure(figsize=(10,6))
+plt.plot(data['Date'],data['AQI'],color='blue',linewidth=2)
+plt.title('AOI Trend Over time')
+plt.xlabel('Date')
+plt.ylabel('AQI')
+plt.grid(True)
+plt.show()
+
+plt.figure(figsize=(10,6))
+
+#plot for PM2.5
+plt.subplot(3,1,1)
+plt.plot(data['Date'],data['PM2.5'],color='red',label='PM2.5')
+plt.title('PM2.5 Trend Over Time')
+plt.xlabel('Date')
+plt.ylabel('Pm2.5 Levels')
+plt.grid(True)
+
+#plot for the PM10
+plt.subplot(3,1,2)
+plt.plot(data['Date'],data['PM10'],color='green',label='PM10')
+plt.title('PM10 Trnd over time')
+plt.xlabel('Date')
+plt.ylabel('PM10 Level')
+plt.grid(True)
+
+#plot for CO
+plt.subplot(3,1,3)
+plt.plot(data['Date'],data['CO'],color='purple',label='CO')
+plt.title('Co Trend Over Time')
+plt.xlabel('Date')
+plt.ylabel('CO level')
+plt.grid(True)
+
+plt.tight_layout()
+plt.show()
+
+plt.figure(figsize=(10,6))
+plt.bar(data['Date'],data['AQI'],color='cyan')
+plt.title('AQI Comparison Across Dates')
+plt.xlabel('Date')
+plt.ylabel('AQI')
+plt.xticks(rotation=90)
+plt.show()
+
+pollutant_data = data[['PM2.5', 'PM10', 'CO']].dropna()
+
+plt.figure(figsize=(10, 6))
+plt.boxplot([pollutant_data['PM2.5'], pollutant_data['PM10'],pollutant_data['CO']], labels=['PM2.5', 'PM10', 'CO'])
+plt.ylabel('Pollutant Levels')
+plt.title('Distribution of Pollutant Levels')
+plt.grid()
+plt.show()
