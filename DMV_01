@@ -1,0 +1,71 @@
+# Practical NO1
+
+
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import json
+
+data=pd.read_csv('supermarket_sales.csv',encoding='cp1252')
+
+data_E=pd.read_excel('Superstore.xlsx')
+
+# with open('StoreSales.json','r') as json_file:
+#   data_j=json.load(json_file)
+json_file='StoreSales.json'
+data_j=pd.read_json('StoreSales.json',encoding='ISO-8859-1')
+
+
+data_j.head()
+
+data.tail()
+
+data.head()
+
+data.info()
+
+data.describe()
+
+data.dropna()
+
+data.drop_duplicates()
+
+unified_data=pd.concat([data,data_E],ignore_index=True)
+
+total_sales=unified_data['Total'].sum()
+
+total_sales
+
+new_data=data_j.groupby('Category')
+
+x=new_data['Quantity'].count().index
+y=new_data['Quantity'].count().values
+
+x
+
+y
+
+import seaborn as sns
+sns.barplot(x=x,y=y)
+plt.xlabel('Category')
+plt.ylabel('No of Product')
+plt.show()
+
+
+grouped_data=data_j.groupby('Category')
+
+grouped_data.head()
+
+x=grouped_data['Sales'].sum()
+
+data_j.columns
+
+x
+
+x.index
+
+labels=np.array(x.index)
+type(labels)
+
+plt.pie(abs(x.values),labels=labels,autopct='%.2f%%')
+plt.show()
