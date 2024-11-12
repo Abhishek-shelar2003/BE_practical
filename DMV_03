@@ -1,0 +1,69 @@
+# Practical No 03
+
+
+import pandas as pd
+import numpy as np
+from sklearn.model_selection import train_test_split
+from sklearn import metrics
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+
+data=pd.read_csv('telecom_customer_churn.csv')
+
+data.head()
+
+data
+
+data.columns
+
+data.shape
+
+data.tail()
+
+data.nunique()
+
+data.isnull().sum()
+
+len(data)
+
+data_cleaned=data.drop_duplicates()
+
+len(data_cleaned)
+
+data.describe()
+
+unique,counts=np.unique(data['Tenure in Months'],return_counts=True)
+
+unique
+
+counts
+
+unique,counts=np.unique(data['Monthly Charge'],return_counts=True)
+
+unique,counts=np.unique(data['Total Charges'],return_counts=True)
+
+sns.pairplot(data[['Tenure in Months','Monthly Charge','Total Charges']])
+
+plt.boxplot(data['Tenure in Months'])
+plt.show()
+
+plt.boxplot(data['Monthly Charge'])
+plt.show()
+
+plt.boxplot(data['Total Charges'])
+plt.show()
+
+x=data.drop('Churn Category',axis=1)
+
+y=data['Churn Category']
+
+X_train,X_test,y_train,y_test=train_test_split(x,y,test_size=0.2,random_state=42)
+
+X_train.shape
+
+y_train.shape
+
+X_test.shape
+
+X_test.shape
