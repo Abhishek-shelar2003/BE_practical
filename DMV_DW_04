@@ -59,3 +59,52 @@ upper_bound=q3+1.5*IQR
 
 sns.boxplot(data['Y_house_price_of_unit_area'])
 plt.show()
+
+# Scatter Plot
+
+plt.figure(figsize=(10,6))
+
+plt.scatter(data['PM2.5'],data['AQI'],color='red',label='PM2.5')
+plt.scatter(data['PM10'],data['AQI'],color='green',label='PM10')
+plt.scatter(data['CO'],data['AQI'],color='purple',label='CO')
+
+plt.title('AQI vs Pollutants Levels')
+plt.xlabel('Pollutant Levels')
+plt.ylabel('AQI')
+plt.legend()
+plt.grid(True)
+plt.show()
+
+plt.figure(figsize=(12, 6))
+plt.plot(data['Date'], data['PM2.5'],color='red',label='PM2.5')
+
+plt.xlabel('Date')
+plt.ylabel('Pollutant Levels')
+plt.title('Trends of Different Pollutants Over Time')
+plt.legend()
+plt.grid()
+plt.show()
+
+
+plt.figure(figsize=(12, 6))
+plt.plot(data['Date'], data['PM10'],color='green', label='PM10')
+
+plt.xlabel('Date')
+plt.ylabel('Pollutant Levels')
+plt.title('Trends of Different Pollutants Over Time')
+plt.legend()
+plt.grid()
+plt.show()
+
+
+plt.figure(figsize=(12, 6))
+plt.plot(data['Date'], data['CO'],color='purple',label='CO')
+
+plt.xlabel('Date')
+plt.ylabel('Pollutant Levels')
+plt.title('Trends of Different Pollutants Over Time')
+plt.legend()
+plt.grid()
+plt.show()
+
+
