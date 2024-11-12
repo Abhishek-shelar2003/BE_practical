@@ -1,0 +1,61 @@
+# Practical 04
+
+
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+
+data=pd.read_csv('Real estate.csv')
+
+data.head()
+
+data.columns
+
+columns=list(data.columns)
+
+columns=[col.replace(' ','_') for col in columns]
+
+columns
+
+data.columns=columns
+data.head()
+
+start_date=2012.917
+end_date=2015.813
+
+# Filter rows based on a date range
+filtered_data = data[(data['X1_transaction_date'] >= start_date) & (data['X1_transaction_date'] <= end_date)]
+
+
+filtered_data
+
+data_sorted_age=data.sort_values(by='X2_house_age')
+data_sorted_age
+
+def assign_group(row):
+  if row['X2_house_age']<=10:
+    return "Group 1"
+  elif row['X2_house_age']<=20:
+    return "Group 2"
+  else:
+    return 'Group 3'
+data['group']=data.apply(assign_group,axis=1)
+
+
+data.head()
+
+average_price_by_group=data.groupby('group')['Y_house_price_of_unit_area'].mean()
+
+average_price_by_group
+
+
+q1=np.percentile(data['Y_house_price_of_unit_area'],25)
+q3=np.percentile(data['Y_house_price_of_unit_area'],75)
+IQR=q3-q1
+lower_bound=q1-1.5*IQR
+upper_bound=q3+1.5*IQR
+
+sns.boxplot(data['Y_house_price_of_unit_area'])
+plt.show()
